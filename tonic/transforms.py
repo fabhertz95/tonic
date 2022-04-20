@@ -438,7 +438,7 @@ class ToAveragedTimesurface:
         temporal_window (float): how far back to look for past events for the time averaging
         tau (float): time constant to decay events around occuring event with.
         decay (str): can be either 'lin' or 'exp', corresponding to linear or exponential decay.
-        num_workers (int): number of workers to be deployed on the histograms computation. When >1, joblib is required. 
+        num_workers (int): number of workers to be deployed on the histograms computation. When >1, joblib is required.
     """
 
     sensor_size: Tuple[int, int, int]
@@ -526,8 +526,8 @@ class ToFrame:
 @dataclass(frozen=True)
 class ToImage:
     """Counts up all events to a *single* image of size sensor_size. ToImage will typically
-    be used in combination with SlicedDataset to cut a recording into smaller chunks that 
-    are then individually binned to frames. 
+    be used in combination with SlicedDataset to cut a recording into smaller chunks that
+    are then individually binned to frames.
     """
 
     sensor_size: Tuple[int, int, int]

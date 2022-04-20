@@ -149,7 +149,9 @@ class TestTransforms:
         events = transform(orig_events)
 
         if p == 1:
-            assert np.array_equal(np.invert(orig_events["p"].astype(bool)), events["p"]), (
+            assert np.array_equal(
+                np.invert(orig_events["p"].astype(bool)), events["p"]
+            ), (
                 "When flipping polarity with probability 1, all event polarities must"
                 " flip"
             )
@@ -171,7 +173,9 @@ class TestTransforms:
         events = transform(orig_events)
 
         if p == 1:
-            assert np.array_equal(np.invert(orig_events["p"].astype(bool)), events["p"]), (
+            assert np.array_equal(
+                np.invert(orig_events["p"].astype(bool)), events["p"]
+            ), (
                 "When flipping polarity with probability 1, all event polarities must"
                 " flip"
             )

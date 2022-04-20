@@ -1,5 +1,5 @@
 import os
-from tonic.io import read_aedat4 
+from tonic.io import read_aedat4
 import numpy as np
 from tonic.dataset import Dataset
 from tonic.download_utils import extract_archive
@@ -33,7 +33,9 @@ class NCARS(Dataset):
 
     sensor_size = None  # different for every recording
     minimum_y_value = 140
-    dtype = np.dtype([("t", np.int64), ("x", np.int16), ("y", np.int16), ("p", np.int8)])
+    dtype = np.dtype(
+        [("t", np.int64), ("x", np.int16), ("y", np.int16), ("p", np.int8)]
+    )
     ordering = dtype.names
 
     def __init__(self, save_to, train=True, transform=None, target_transform=None):
@@ -64,8 +66,10 @@ class NCARS(Dataset):
         Returns:
             a tuple of (events, target) where target is the index of the target class.
         """
-        events = read_aedat4(self.data[index])# loris.read_file(self.data[index])["events"]
-        events = np.lib.recfunctions.rename_fields(events, {'ts': 't', 'is_increase': 'p'})
+        events = read_aedat4(self.data[index])
+        events = np.lib.recfunctions.rename_fields(
+            events, {"ts": "t", "is_increase": "p"}
+        )
         events = events.astype(self.dtype)
         events["y"] -= self.minimum_y_value
         events["y"] = events["y"].max() - events["y"]
@@ -80,6 +84,7 @@ class NCARS(Dataset):
         return len(self.data)
 
     def _check_exists(self) -> bool:
-        return self._is_file_present() and self._folder_contains_at_least_n_files_of_type(
-            8000, ".dat"
+        return (
+            self._is_file_present()
+            and self._folder_contains_at_least_n_files_of_type(8000, ".dat")
         )

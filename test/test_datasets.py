@@ -56,6 +56,7 @@ class DVSGestureTestCaseTest(dataset_utils.DatasetTestCase):
         np.save(testfolder + "/0.npy", events)
         return {"n_samples": 1}
 
+
 class NCaltech101TestCase(dataset_utils.DatasetTestCase):
     DATASET_CLASS = datasets.NCALTECH101
     FEATURE_TYPES = (datasets.NCALTECH101.dtype,)
@@ -69,17 +70,18 @@ class NCaltech101TestCase(dataset_utils.DatasetTestCase):
         download_url(url=base_url + filename, root=testfolder, filename=filename)
         return {"n_samples": 1}
 
+
 class NCARSTestCaseTrain(dataset_utils.DatasetTestCase):
     DATASET_CLASS = datasets.NCARS
     FEATURE_TYPES = (datasets.NCARS.dtype,)
     TARGET_TYPES = (int,)
-    KWARGS = {"train": True}    
+    KWARGS = {"train": True}
 
     def inject_fake_data(self, tmpdir):
         testfolder = os.path.join(tmpdir, "NCARS/train/cars/")
         os.makedirs(testfolder, exist_ok=True)
         filename = "obj_007998_td.dat"
-        download_url(url=base_url+filename, root=testfolder, filename=filename)
+        download_url(url=base_url + filename, root=testfolder, filename=filename)
         return {"n_samples": 1}
 
 
@@ -87,14 +89,15 @@ class NCARSTestCaseTest(dataset_utils.DatasetTestCase):
     DATASET_CLASS = datasets.NCARS
     FEATURE_TYPES = (datasets.NCARS.dtype,)
     TARGET_TYPES = (int,)
-    KWARGS = {"train": False}    
+    KWARGS = {"train": False}
 
     def inject_fake_data(self, tmpdir):
         testfolder = os.path.join(tmpdir, "NCARS/test/cars/")
         os.makedirs(testfolder, exist_ok=True)
         filename = "obj_007998_td.dat"
-        download_url(url=base_url+filename, root=testfolder, filename=filename)
-        return {"n_samples": 1} 
+        download_url(url=base_url + filename, root=testfolder, filename=filename)
+        return {"n_samples": 1}
+
 
 class NMNISTTestCaseTrain(dataset_utils.DatasetTestCase):
     DATASET_CLASS = datasets.NMNIST

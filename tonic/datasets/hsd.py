@@ -38,8 +38,9 @@ class HSD(Dataset):
         return len(file["labels"])
 
     def _check_exists(self):
-        return self._is_file_present() and self._folder_contains_at_least_n_files_of_type(
-            1, ".h5"
+        return (
+            self._is_file_present()
+            and self._folder_contains_at_least_n_files_of_type(1, ".h5")
         )
 
 

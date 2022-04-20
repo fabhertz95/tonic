@@ -9,7 +9,7 @@ events_struct = [("x", np.int16), ("y", np.int16), ("t", np.int64), ("p", bool)]
 def make_structured_array(x, y, t, p, dtype=events_struct):
     """
     Make a structured array given lists of x, y, t, p
-  
+
     Args:
         x: List of x values
         y: List of y values
@@ -24,7 +24,7 @@ def make_structured_array(x, y, t, p, dtype=events_struct):
 def read_aedat4(in_file):
     """
     Get the aer events from version 4 of .aedat file
-  
+
     Args:
         in_file: str The name of the .aedat file
     Returns:
@@ -33,8 +33,10 @@ def read_aedat4(in_file):
     try:
         import loris
     except Exception as e:
-        print("Error (missing dependency): loris is needed in order to read DAT and AEDAT files.")
-          
+        print(
+            "Error (missing dependency): loris is needed in order to read DAT and AEDAT files."
+        )
+
     event_data = loris.read_file(in_file)
     events = event_data["events"]
     return events
@@ -55,11 +57,11 @@ def read_dvs_128(filename):
     all_events = get_aer_events_from_file(filename, data_version, data_start)
     all_addr = all_events["address"]
     t = all_events["timeStamp"]
-  
+
     x = (all_addr >> 8) & 0x007F
     y = (all_addr >> 1) & 0x007F
     p = all_addr & 0x1
-  
+
     xytp = make_structured_array(x, y, t, p)
     shape = (128, 128)
     return shape, xytp
@@ -150,14 +152,14 @@ def read_mnist_file(bin_file, dtype):
     raw_data = np.fromfile(f, dtype=np.uint8)
     f.close()
     raw_data = np.uint32(raw_data)
-  
+
     all_y = raw_data[1::5]
     all_x = raw_data[0::5]
     all_p = (raw_data[2::5] & 128) >> 7  # bit 7
     all_ts = ((raw_data[2::5] & 127) << 16) | (raw_data[3::5] << 8) | (raw_data[4::5])
-  
+
     # Process time stamp overflow events
-    time_increment = 2 ** 13
+    time_increment = 2**13
     overflow_indices = np.where(all_y == 240)[0]
     for overflow_index in overflow_indices:
         all_ts[overflow_index:] += time_increment
@@ -234,7 +236,7 @@ def get_aer_events_from_file(filename, data_version, data_start):
             header = f.read(28)
             if not header or len(header) == 0:
                 break
-      
+
             # read header
             capacity = struct.unpack("I", header[16:20])[0]
             event_list.append(np.fromfile(f, event_dtype, capacity))
