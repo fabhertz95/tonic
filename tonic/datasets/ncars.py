@@ -33,8 +33,8 @@ class NCARS(Dataset):
 
     sensor_size = None  # different for every recording
     minimum_y_value = 140
-    dtype = np.dtype([("t", "<u8"), ("x", "<u2"), ("y", "<u2"), ("p", "?")])
-    ordering = "txyp"
+    dtype = np.dtype([("t", np.int64), ("x", np.int16), ("y", np.int16), ("p", np.int8)])
+    ordering = dtype.names
 
     def __init__(self, save_to, train=True, transform=None, target_transform=None):
         super(NCARS, self).__init__(
@@ -66,6 +66,7 @@ class NCARS(Dataset):
         """
         events = loris.read_file(self.data[index])["events"]
         events = np.lib.recfunctions.rename_fields(events, {'ts': 't', 'is_increase': 'p'})
+        events = events.astype(self.dtype)
         events["y"] -= self.minimum_y_value
         events["y"] = events["y"].max() - events["y"]
         target = self.targets[index]
