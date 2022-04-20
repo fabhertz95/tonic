@@ -1,5 +1,5 @@
 import os
-import loris
+from tonic.io import read_aedat4 
 import numpy as np
 from tonic.dataset import Dataset
 from tonic.download_utils import extract_archive
@@ -64,7 +64,7 @@ class NCARS(Dataset):
         Returns:
             a tuple of (events, target) where target is the index of the target class.
         """
-        events = loris.read_file(self.data[index])["events"]
+        events = read_aedat4(self.data[index])# loris.read_file(self.data[index])["events"]
         events = np.lib.recfunctions.rename_fields(events, {'ts': 't', 'is_increase': 'p'})
         events = events.astype(self.dtype)
         events["y"] -= self.minimum_y_value
