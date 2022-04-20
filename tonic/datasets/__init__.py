@@ -4,6 +4,7 @@ from .davisdataset import DAVISDATA
 from .dsec import DSEC
 from .dvsgesture import DVSGesture
 from .hsd import SHD, SSC
+from .ncars import NCARS
 from .mvsec import MVSEC
 from .ncaltech101 import NCALTECH101
 from .nmnist import NMNIST
@@ -14,19 +15,20 @@ from .tum_vie import TUMVIE
 from .visual_place_recognition import VPR
 
 __all__ = [
-    "ASLDVS",
-    "CIFAR10DVS",
-    "DAVISDATA",
-    "DSEC",
-    "DVSGesture",
-    "MVSEC",
-    "NCALTECH101",
-    "NMNIST",
-    "NTIDIGITS",
-    "POKERDVS",
-    "SHD",
-    "SMNIST",
-    "SSC",
-    "TUMVIE",
-    "VPR",
+  "ASLDVS",
+  "CIFAR10DVS",
+  "DAVISDATA",
+  "DSEC",
+  "DVSGesture",
+  "MVSEC",
+  "NCALTECH101",
+  "NCARS",
+  "NMNIST",
+  "NTIDIGITS",
+  "POKERDVS",
+  "SHD",
+  "SMNIST",
+  "SSC",
+  "TUMVIE",
+  "VPR",
 ]
