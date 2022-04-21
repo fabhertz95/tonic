@@ -33,10 +33,12 @@ def read_aedat4(in_file):
     try:
         import loris
     except Exception as e:
-        print(
-            "Error (missing dependency): loris is needed in order to read DAT and AEDAT files."
-        )
+        import sys
 
+        print(
+            "Error (missing dependency): loris is needed in order to read DAT and AEDAT files.",
+            file=sys.stderr,
+        )
     event_data = loris.read_file(in_file)
     events = event_data["events"]
     return events
